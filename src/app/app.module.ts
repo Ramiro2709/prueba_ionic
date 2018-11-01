@@ -7,33 +7,33 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 
-import {DetailPage} from '../pages/detail/detail';
+import {DetailPage} from '../pages/detail/detail'; /////// Importar las paginas que se usa
 
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http'; ////////Agregado
 //import {php} from 'http://localhost/pruebas/Ionic/prueba.php';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    DetailPage
+    DetailPage ///////
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpClientModule
+    HttpClientModule ///////////
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    DetailPage
+    DetailPage ///////// 
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    HttpClientModule
+    HttpClientModule /////////
 
   ]
 })

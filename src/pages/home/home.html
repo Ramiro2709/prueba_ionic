@@ -6,9 +6,9 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding class="ion-content">
   <p>Prueba php mysql</p>
-  <ion-input type="text" [(ngModel)]="input_localidad" value="TELLIER" name="input_localidad"></ion-input>
+  <ion-input type="text" [(ngModel)]="input_localidad" value="Rio Gallegos" name="input_localidad"></ion-input>
   <button (click)="load(input_localidad)">Buscar Telefonos</button>
   <ion-list>
     <button ion-item *ngFor="let item of items" (click)="itemSelected(item)">

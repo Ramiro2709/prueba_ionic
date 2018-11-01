@@ -12,7 +12,6 @@ import { NgModel } from '@angular/forms';
 export class HomePage {
   items: any[];
   ip_wamp: string ;
-  //localidad : object ;
   header : object ;
   //localidad_get : string ;
   constructor(public navCtrl: NavController, public http: HttpClient) {

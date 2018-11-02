@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import {DetailPage} from '../detail/detail';
+import {DetailPage} from '../detail/detail'; //Pagina detalles
 import { HttpClient } from '@angular/common/http'; //// Para que tome al php
 import { HttpHeaders } from '@angular/common/http';
 import { NgModel } from '@angular/forms';
+import { FunctionCall } from '@angular/compiler';
+//import {items} from '../home';
 
 @Component({
   selector: 'page-home',
@@ -11,6 +13,7 @@ import { NgModel } from '@angular/forms';
 })
 export class HomePage {
   items: any[];
+  longitud : any;
   ip_wamp: string ;
   header : object ;
   //localidad_get : string ;
@@ -32,6 +35,7 @@ export class HomePage {
 
     //this.localidad_get = 'Rio%20Gallegos';
     this.items = [];
+    this.longitud = 0;
     //this.ip_wamp = 'http://localhost/pruebas/Ionic/prueba.php?localidad='+this.localidad_get; //IP local
     this.ip_wamp = 'http://localhost/pruebas/Ionic/prueba.php'; //IP local
     //this.http.get(this.ip_wamp)
@@ -56,33 +60,52 @@ export class HomePage {
 
   itemSelected(item){
     //alert(item.text);
+    console.log(item);
     this.navCtrl.push(DetailPage, {
       item:item
-    })
+    });
   }
 
   load(input_loc): void{
     var localidad = JSON.stringify({localidad: input_loc});
-    for(let i = 0; i<10;i++){
-      //alert(this.ip);
-      this.http
-      .post<string>(this.ip_wamp,localidad)
-      .subscribe((data : any) =>
-      {
-         //console.dir(data);
-         this.items.push({
-          text: data[i],
-          id: i
+    this.http
+    .post<string>(this.ip_wamp,localidad)
+    .subscribe((data : any) =>
+    {
+      this.longitud = data['lenght'];
+      console.log(this.longitud);
+      for(let i = 0; i < this.longitud; i++){
+        //alert(this.ip);
+        this.http
+        .post<string>(this.ip_wamp,localidad)
+        .subscribe((data : any) =>
+        {
+          //console.dir(data);
+          console.log(data[i][0]);
+            this.items.push({
+              text: data[i][0],
+              direccion: data[i][1],
+              telefono: data[i][2],
+              img: data[i][3],
+              length: data['lenght'],
+              id: i
+            });  
+          i++;
+        },
+        (error : any) =>
+        {
+          //console.dir(error);  
+          //this.ip = prompt("IP incorrecta, ingrese otra", "http://localhost/pruebas/Ionic/prueba.php");
+          //ip = 'http://localhost/pruebas/Ionic/prueba.php'; //Si no funciona la ip local intenta con otra
+          //this.load(i,ip);
         });
-      },
-      (error : any) =>
-      {
-         console.dir(error);
-         //this.ip = prompt("IP incorrecta, ingrese otra", "http://localhost/pruebas/Ionic/prueba.php");
-         //ip = 'http://localhost/pruebas/Ionic/prueba.php'; //Si no funciona la ip local intenta con otra
-         //this.load(i,ip);
-      });
-    }
+      } //Fin For
+    },
+    (error : any) =>
+    {
+
+    });
+    
     
   }
 

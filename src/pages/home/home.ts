@@ -76,29 +76,16 @@ export class HomePage {
       console.log(this.longitud);
       for(let i = 0; i < this.longitud; i++){
         //alert(this.ip);
-        this.http
-        .post<string>(this.ip_wamp,localidad)
-        .subscribe((data : any) =>
-        {
-          //console.dir(data);
-          console.log(data[i][0]);
-            this.items.push({
-              text: data[i][0],
-              direccion: data[i][1],
-              telefono: data[i][2],
-              img: data[i][3],
-              length: data['lenght'],
-              id: i
-            });  
-          i++;
-        },
-        (error : any) =>
-        {
-          //console.dir(error);  
-          //this.ip = prompt("IP incorrecta, ingrese otra", "http://localhost/pruebas/Ionic/prueba.php");
-          //ip = 'http://localhost/pruebas/Ionic/prueba.php'; //Si no funciona la ip local intenta con otra
-          //this.load(i,ip);
-        });
+        //console.dir(data);
+        //console.log(data[i][0]);
+          this.items.push({
+            text: data[i][0],
+            direccion: data[i][1],
+            telefono: data[i][2],
+            pagina: data[i][3],
+            id: i
+          });  
+        i++;
       } //Fin For
     },
     (error : any) =>

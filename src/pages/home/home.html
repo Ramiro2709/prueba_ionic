@@ -8,11 +8,14 @@
 
 <ion-content padding class="ion-content">
   <p>Prueba php mysql</p>
+  <button (click)="generar_botones()">Generar botones</button>
   <ion-input type="text" [(ngModel)]="input_localidad" value="Rio Gallegos" name="input_localidad"></ion-input>
   <button (click)="load(input_localidad)">Buscar Telefonos</button>
+  <button (click)="load('Piedrabuena')">Piedra Buena</button>
   <ion-list>
     <button ion-item *ngFor="let item of items" (click)="itemSelected(item)">
       {{item.text}}
     </button>  
   </ion-list>
+ 
 </ion-content>

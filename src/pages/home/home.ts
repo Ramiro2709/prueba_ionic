@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {DetailPage} from '../detail/detail'; //Pagina detalles
+import {BotonesPage} from '../botones/botones';
+
 import { HttpClient } from '@angular/common/http'; //// Para que tome al php
 import { HttpHeaders } from '@angular/common/http';
 import { NgModel } from '@angular/forms';
@@ -18,15 +20,7 @@ export class HomePage {
   header : object ;
   //localidad_get : string ;
   constructor(public navCtrl: NavController, public http: HttpClient) {
-    //this.localidad = 'Rio Gallegos';
-    /*
-    this.localidad = {
-      'localidad' : 'TELLIER'
-    };
-    */
-  
-
-    const httpOptions = {
+    const httpOptions = { //Para que ande el post
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
         'Authorization': ''
@@ -56,7 +50,7 @@ export class HomePage {
         //alert(this.ip);
         //this.load(localidad);
       });
-  }
+  } //Fin constructor
 
   itemSelected(item){
     //alert(item.text);
@@ -66,7 +60,14 @@ export class HomePage {
     });
   }
 
+  generar_botones(){
+    //alert(item.text);
+    this.navCtrl.push(BotonesPage, {
+    });
+  }
+
   load(input_loc): void{
+    this.items = [];
     var localidad = JSON.stringify({localidad: input_loc});
     this.http
     .post<string>(this.ip_wamp,localidad)
@@ -83,9 +84,10 @@ export class HomePage {
             direccion: data[i][1],
             telefono: data[i][2],
             pagina: data[i][3],
+            imagen: data[i][4],
             id: i
           });  
-        i++;
+        
       } //Fin For
     },
     (error : any) =>

@@ -8,6 +8,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 
 import {DetailPage} from '../pages/detail/detail'; /////// Importar las paginas que se usa
+import {BotonesPage} from '../pages/botones/botones';
 
 import { HttpClientModule, HttpClient } from '@angular/common/http'; ////////Agregado
 //import {php} from 'http://localhost/pruebas/Ionic/prueba.php';
@@ -16,7 +17,8 @@ import { HttpClientModule, HttpClient } from '@angular/common/http'; ////////Agr
   declarations: [
     MyApp,
     HomePage,
-    DetailPage ///////
+    DetailPage, ///////
+    BotonesPage
   ],
   imports: [
     BrowserModule,
@@ -27,7 +29,8 @@ import { HttpClientModule, HttpClient } from '@angular/common/http'; ////////Agr
   entryComponents: [
     MyApp,
     HomePage,
-    DetailPage ///////// 
+    DetailPage, ///////// 
+    BotonesPage
   ],
   providers: [
     StatusBar,
